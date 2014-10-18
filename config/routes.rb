@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   resource :session, only: [:create, :destroy] do
     get 'unauthenticated', action: :unauthenticated
   end
+  get :logout, to: 'sessions#destroy'
 end

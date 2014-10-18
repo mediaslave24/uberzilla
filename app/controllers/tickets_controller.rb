@@ -14,7 +14,7 @@ class TicketsController < ApplicationController
   end
 
   def create
-    @ticket = current_user.tickets.create(ticket_params)
+    @ticket = current_customer.tickets.create(ticket_params)
     respond_with(@ticket)
   end
 
@@ -30,8 +30,8 @@ class TicketsController < ApplicationController
   end
 
   private
-    def current_user
-      @current_user ||= super || Customer.find_or_create_by(customer_params)
+    def current_customer
+      @current_customer ||= current_user || Customer.find_or_create_by(customer_params)
     end
 
     def customer_params
@@ -51,6 +51,6 @@ class TicketsController < ApplicationController
         current_user.tickets
       else
         Ticket.all
-      end
+      end.includes(:customer, :status, :staff => :department)
     end
 end

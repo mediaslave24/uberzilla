@@ -1,0 +1,18 @@
+%table.table
+  %thead
+    %tr
+      %th #
+      %th Subject
+      %th Customer Email
+      %th Customer Name
+      %td Department
+      %td Status
+  %tbody
+    %tr{'ng-repeat' => 't in tickets'}
+      %td {{ $index }}
+      %td
+        %a{href: '#/tickets/{{t.uid}}'}{{ t.subject }}
+      %td {{ t.customer_email }}
+      %td {{ t.customer_name }}
+      %td {{ t.department_name }}
+      %td {{ t.status_name }}

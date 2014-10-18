@@ -2,7 +2,7 @@ module Password
   include BCrypt
 
   def password=(value)
-    self.encrypted_password = Password.create(value)
+    self.encrypted_password = Password.create(value) if value
   end
 
   def password
@@ -10,6 +10,6 @@ module Password
   end
 
   def valid_password?(value)
-    !value.nil? && password == value
+    !value.nil? && !encrypted_password.nil? && password == value
   end
 end

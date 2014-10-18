@@ -17,5 +17,6 @@
 //= require moment
 //= require angular
 //= require angular-route
+//= require angular-bootstrap
 //= require ./ngApp
 //= require_tree .

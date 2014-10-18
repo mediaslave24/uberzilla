@@ -1,19 +1,15 @@
 class SessionsController < ApplicationController
   def unauthenticated
-    respond_to do |f|
-      f.json do
-        render json: { error: params[:error] }
-      end
-    end
+    redirect_to root_path, alert: 'Wrong password'
   end
 
   def create
-    warden.authenticate!
+    authenticate! :password
     redirect_to root_path
   end
 
   def destroy
-    warden.logout
+    logout
     redirect_to root_path
   end
 end

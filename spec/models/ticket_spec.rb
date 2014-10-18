@@ -33,4 +33,22 @@ RSpec.describe Ticket, :type => :model do
       expect(ticket.changelog.length).to eq(3)
     end
   end
+
+  context '#status' do
+    let! :default_status do
+      create :ticket_status, default: true
+    end
+
+    let! :other_statuses do
+      create_pair :ticket_status
+    end
+
+    let! :ticket do
+      create :ticket
+    end
+
+    it 'is equal to first TicketStatus in the database which is default' do
+      expect(ticket.status).to eq(default_status)
+    end
+  end
 end

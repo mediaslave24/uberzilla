@@ -50,15 +50,16 @@ module Uberzilla
         params['login'] && params['password']
       end
 
-      def user
+      def get_user
         User.find_by(email: params['login']) || User.new
       end
 
       def authenticate!
+        user = get_user
         if user.valid_password?(params['password'])
           success!(user)
         else
-          fail!(user)
+          fail!(error: 'Wrong password')
         end
       end
     end

@@ -1,0 +1,35 @@
+%table.table{'ng-init' => 'loadUsers()'}
+  %thead
+    %tr
+      %th #
+      %th Name
+      %th Email
+      %th Type
+      %th Actions
+  %tbody
+    %tr{'ng-repeat' => 'u in users'}
+      %td {{ $index }}
+      %td {{ u.name }}
+      %td {{ u.email }}
+      %td {{ u.type }}
+      %th
+        %a{href: 'javascript:void(0);', 'ng-click' => 'destroy(u.id)'} Destroy
+        %br/
+        %a{href: 'javascript:void(0);', 'ng-click' => 'change(u)'} Change
+
+%form#change-form.form
+  %div{'ng-show' => '!!changeUser'}
+    .form-group
+      %label Name
+      %input.form-control{type: 'text', 'ng-model' => 'changeUser.name'}
+
+    .form-group
+      %label Email
+      %input.form-control{type: 'email', 'ng-model' => 'changeUser.email'}
+
+    .form-group
+      %label Password
+      %input.form-control{type: 'password', 'ng-model' => 'changeUser.password'}
+
+    %button.btn.btn-default{'ng-click' => 'submitChange()'} Ok
+    %button.btn.btn-default{'ng-click' => 'changeUser = null'} Cancel

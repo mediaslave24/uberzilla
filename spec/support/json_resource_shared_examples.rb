@@ -14,7 +14,7 @@ RSpec.shared_examples 'json resource' do
 
     it 'returns list of resources on success' do
       get :index, format: :json
-      expect(assigns(:resources).to_a).to eq(resources.sort_by(&:created_at).to_a)
+      expect(assigns(:resources).sort_by(&:id).to_a).to eq(resources.sort_by(&:id).to_a)
     end
   end
 

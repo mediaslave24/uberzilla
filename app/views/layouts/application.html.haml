@@ -1,8 +1,18 @@
 !!!
-%head
-  %html
-  = stylesheet_link_tag    'application', media: 'all'
-  = javascript_include_tag 'application'
+%html{'ng-app' => 'app'}
+  %head
   = csrf_meta_tags
   %body
-    = yield
+    .container
+      .row
+        .col-md-2
+          %tabset{vertical: 'true', type: 'pills'}
+            %tab{'ng-repeat' => 'tab in tabs', active: 'tab.active', heading: '{{tab.name}}', 'ng-click' => 'tab.select()'}
+          - flash.each do |type, message|
+            %alert{type: 'warning', 'ng-hide' => 'hideAlerts'}= message
+        .col-md-10=yield
+
+    :javascript
+      window.currentUser = #{current_user.try(:as_json, only: [:type]).to_json};
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'

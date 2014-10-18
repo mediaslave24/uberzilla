@@ -1,0 +1,25 @@
+%h2 New Ticket
+.row
+  .col-md-6
+    .form
+      .form-group
+        %label Your Name
+        %input.form-control{type: 'text', 'ng-model' => 'customer.name'}
+
+      .form-group
+        %label Your Email
+        %input.form-control{type: 'email', 'ng-model' => 'customer.email'}
+
+      .form-group
+        %label Subject
+        %input.form-control{type: 'text', 'ng-model' => 'ticket.subject'}
+
+      .form-group
+        %label Description
+        %textarea.form-control{'ng-model' => 'ticket.body'}
+
+      .form-group
+        %label Department
+        %select.form-control{'ng-options' => 'd.name for d in departments', 'ng-model' => 'ticket.department_id', required: 'true'}
+
+      %button.btn.btn-default{'ng-click' => 'submit()'} Submit
