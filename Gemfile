@@ -39,6 +39,7 @@ gem 'twitter-bootstrap-rails', '~> 3.2'
 gem 'thin'
 gem 'bcrypt'
 gem 'valid_email'
+gem 'pusher'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

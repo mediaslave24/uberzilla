@@ -4,13 +4,15 @@
 
     %p {{ ticket.body }}
 
-    %p{'ng-show' => '!!ticket.department'} <b>Department:</b> {{ ticket.department_name }}
-
     %div{'ng-if' => '!loggedIn'}
+      %p <b>Department</b>: {{ ticket.department_name }}
       %p <b>Status</b>: {{ ticket.status_name }}
       %p <b>Assignee</b>: {{ ticket.staff_name }}
 
     %div{'ng-if' => 'loggedIn'}
+      %p
+        %b Department
+        %select.form-control{'ng-options' => 'department.id as department.name for department in departments', 'ng-model' => 'ticket.department_id'}
       %p
         %b Status
         %select.form-control{'ng-options' => 'status.id as status.name for status in ticketStatuses', 'ng-model' => 'ticket.status_id'}

@@ -10,11 +10,11 @@ class Ticket < ActiveRecord::Base
   validates_presence_of :subject, :body
   has_paper_trail
 
-  with_options allow_nil: true do |opt|
-    opt.delegate :name, :email, to: :customer, prefix: true
-    opt.delegate :department_name, to: :staff
-    opt.delegate :name, :id, to: :status, prefix: true
-    opt.delegate :name, :email, :id, to: :staff, prefix: true
+  with_options allow_nil: true, prefix: true do |opt|
+    opt.delegate :name, :email, to: :customer
+    opt.delegate :name, to: :department
+    opt.delegate :name, :id, to: :status
+    opt.delegate :name, :email, :id, to: :staff
   end
 
   def changelog
@@ -33,4 +33,6 @@ class Ticket < ActiveRecord::Base
       staff_id: staff_id
     )
   end
+
+  include Pusher::TicketCallbacks
 end

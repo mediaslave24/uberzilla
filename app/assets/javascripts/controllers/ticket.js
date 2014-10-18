@@ -3,7 +3,9 @@ ngApp.controller('ticket', [
     'api',
     '$routeParams',
     'currentUser',
-    function ($scope, api, $routeParams, currentUser) {
+    'Pusher',
+    'pusherNames',
+    function ($scope, api, $routeParams, currentUser, Pusher, pusherNames) {
 
   var nilObject = {name: "Unknown"};
 
@@ -25,7 +27,8 @@ ngApp.controller('ticket', [
     return api.tickets.update($scope.ticket.uid, {ticket: {
       staff_id: $scope.ticket.staff_id,
       staff_type: (staff || {}).type,
-      status_id: $scope.ticket.status_id
+      status_id: $scope.ticket.status_id,
+      department_id: $scope.ticket.department_id
     }});
   }
 
@@ -47,7 +50,7 @@ ngApp.controller('ticket', [
           return responses;
         }
 
-        if (log.staff_id && log.staff_id[0] !== log.staff_id[1]) {
+        if (log.staff_id) {
           var staff = _.find($scope.staffs, {id: log.staff_id[1]}) || nilObject;
           if (staff) {
             responses.push({
@@ -56,7 +59,7 @@ ngApp.controller('ticket', [
           }
         }
 
-        if (log.status_id && log.status_id[0] !== log.status_id[1]) {
+        if (log.status_id) {
           var status1 = _.find($scope.ticketStatuses, {
             id: log.status_id[0]
           }) || nilObject,
@@ -67,6 +70,20 @@ ngApp.controller('ticket', [
 
           responses.push({
             time: log.updated_at[1], message: 'Changed ticket status from ' + status1.name + ' to ' + status2.name
+          });
+        }
+
+        if(log.department_id) {
+          var department1 = _.find($scope.departments, {
+            id: log.department_id[0]
+          }) || nilObject,
+
+            department2 = _.find($scope.departments, {
+              id: log.department_id[1]
+            }) || nilObject;
+
+          responses.push({
+            time: log.updated_at[1], message: 'Changed ticket department from ' + department1.name + ' to ' + department2.name
           });
         }
 
@@ -83,4 +100,6 @@ ngApp.controller('ticket', [
   $scope.takeOwnerShip = takeOwnerShip;
 
   $scope.loadChangelog = loadChangelog;
+
+  Pusher.subscribe(pusherNames.channels.ticket($routeParams.uid), pusherNames.events.ticketUpdate(), loadTicket);
 }]);

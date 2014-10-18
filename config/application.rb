@@ -37,6 +37,8 @@ module Uberzilla
       g.helpers false
     end
 
+    config.autoload_paths += %W(#{config.root}/lib)
+
     Warden::Manager.serialize_into_session do |user|
       user.id
     end
@@ -67,6 +69,10 @@ module Uberzilla
     config.middleware.use RailsWarden::Manager do |m|
       m.failure_app = SessionsController.action(:unauthenticated)
       m.default_strategies :password
+    end
+
+    if defined?(Pusher)
+      Pusher.url = ENV['PUSHER_URL'] || 'http://21d0fb09b2120d8d3d6c:36d8502ad7861ebf4f9b@api.pusherapp.com/apps/93337'
     end
   end
 end

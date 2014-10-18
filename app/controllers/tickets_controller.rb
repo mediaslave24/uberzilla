@@ -46,7 +46,7 @@ class TicketsController < ApplicationController
 
     def ticket_params
       if current_user.is_a?(Customer)
-        params.require(:ticket).permit(:subject, :body)
+        params.require(:ticket).permit(:subject, :body, :department_id)
       else
         params.require(:ticket).permit(:subject, :body, :staff_id, :staff_type, :status_id, :department_id)
       end

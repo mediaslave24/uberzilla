@@ -20,5 +20,6 @@
 //= require angular-bootstrap
 //= require angular-animate
 //= require angular-loading-bar
+//= require angular-pusher
 //= require ./ngApp
 //= require_tree .

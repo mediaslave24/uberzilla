@@ -20,6 +20,6 @@
 
       .form-group
         %label Department
-        %select.form-control{'ng-options' => 'd.name for d in departments', 'ng-model' => 'ticket.department_id', required: 'true'}
+        %select.form-control{'ng-options' => 'd.id as d.name for d in departments', 'ng-model' => 'ticket.department_id', required: 'true'}
 
       %button.btn.btn-default{'ng-click' => 'submit()'} Submit

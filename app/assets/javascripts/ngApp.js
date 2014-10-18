@@ -1,6 +1,20 @@
-window.ngApp = angular.module('app', ['ngRoute', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate']);
+window.ngApp = angular.module('app', ['ngRoute', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'doowb.angular-pusher']);
 
-ngApp.config(['$routeProvider', function ($routeProvider) {
+ngApp.value('pusherNames', {
+  channels: {
+    ticket: function (uid) {
+      return 'tickets-' + uid;
+    }
+  },
+
+  events: {
+    ticketUpdate: function () { return 'ticket-update'; }
+  }
+});
+
+ngApp.config(['PusherServiceProvider', '$routeProvider', function (PusherServiceProvider, $routeProvider) {
+  PusherServiceProvider.setToken('21d0fb09b2120d8d3d6c');
+
   function logout() {
     location.replace('/logout');
   }
