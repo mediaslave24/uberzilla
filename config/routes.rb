@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   end
 
   with_options only: [:index, :create, :destroy, :update] do |draw|
-    draw.resources :departments, :statuses, :users
+    draw.resources :departments, :ticket_statuses, :users
   end
 
   root 'templates#index'

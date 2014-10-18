@@ -1,12 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe DepartmentsController, :type => :controller do
+RSpec.describe TicketStatusesController, :type => :controller do
   let :resource_name do
-    'departments'
+    'ticket_statuses'
   end
 
   let :resource_params do
-    { name: '123' }
+    {
+      name: 'thestatus',
+    }
   end
 
   it_behaves_like 'json resource'
