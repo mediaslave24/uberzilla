@@ -15,4 +15,16 @@ RSpec.describe User, :type => :model do
       expect(@user.password).to eq(@password)
     end
   end
+
+  context 'email' do
+    let!(:user) do
+      create :user
+    end
+
+    it "can't be invalid" do
+      expect {
+        user.update email: 'invalid@email'
+      }.to change(user, :valid?).from(true).to(false)
+    end
+  end
 end
