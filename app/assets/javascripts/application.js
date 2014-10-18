@@ -13,4 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require lodash
+//= require moment
+//= require angular
+//= require angular-route
+//= require ./ngApp
 //= require_tree .
