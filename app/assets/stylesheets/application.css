@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require angular-loading-bar
  *= require_self
  */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

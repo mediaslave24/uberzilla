@@ -1,7 +1,20 @@
-%h1 {{ ticket.subject }}
+.row{'ng-init' => 'loadTicket()'}
+  .col-md-8
+    %h1 {{ ticket.subject }}
 
-%p {{ ticket.body }}
+    %p {{ ticket.body }}
 
-%p{'ng-show' => '!!ticket.department'} <b>Department:</b> {{ ticket.department_name }}
+    %p{'ng-show' => '!!ticket.department'} <b>Department:</b> {{ ticket.department_name }}
 
-%p <b>Status</b>: {{ ticket.status_name }}
+    %div{'ng-if' => '!loggedIn'}
+      %p <b>Status</b>: {{ ticket.status_name }}
+      %p <b>Assignee</b>: {{ ticket.staff_name }}
+
+    %div{'ng-if' => 'loggedIn'}
+      %p
+        %b Status
+        %select.form-control{'ng-options' => 'status.id as status.name for status in ticketStatuses', 'ng-model' => 'ticket.status_id'}
+
+      %p
+        %b Assignee
+        %select.form-control{'ng-options' => 'staff.id as staff.name for staff in staffs', 'ng-model' => 'ticket.staff_id'}

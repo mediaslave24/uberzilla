@@ -5,28 +5,35 @@
       %th Name
       %th Email
       %th Type
+      %th Department
       %th Actions
   %tbody
-    %tr{'ng-repeat' => 'u in staffs'}
+    %tr{'ng-repeat' => 'staff in staffs'}
       %td {{ $index }}
-      %td {{ u.name }}
-      %td {{ u.email }}
-      %td {{ u.type }}
+      %td {{ staff.name }}
+      %td {{ staff.email }}
+      %td {{ staff.type }}
+      %td {{ staff.department_name }}
       %th
-        %a{href: 'javascript:void(0);', 'ng-click' => 'destroy(u.id)'} Destroy
+        %a{href: 'javascript:void(0);', 'ng-click' => 'destroy(staff.id)', 'ng-if' => 'staff.type !== "Admin"'} Destroy
 
-%form.form
-  %h3 New Staff
-  .form-group
-    %label Name
-    %input.form-control{type: 'text', 'ng-model' => 'newStaff.name'}
+.col-md-8
+  %form.form
+    %h3 New Staff
+    .form-group
+      %label Name
+      %input.form-control{type: 'text', 'ng-model' => 'newStaff.name'}
 
-  .form-group
-    %label Email
-    %input.form-control{type: 'email', 'ng-model' => 'newStaff.email'}
+    .form-group
+      %label Email
+      %input.form-control{type: 'email', 'ng-model' => 'newStaff.email'}
 
-  .form-group
-    %label Password
-    %input.form-control{type: 'password', 'ng-model' => 'newStaff.password'}
+    .form-group
+      %label Password
+      %input.form-control{type: 'password', 'ng-model' => 'newStaff.password'}
 
-  %button.btn.btn-default{'ng-click' => 'create()'} Create
+    .form-group
+      %label Department
+      %select.form-control{'ng-options' => 'department.id as department.name for department in departments', 'ng-model' => 'newStaff.department_id'}
+
+    %button.btn.btn-default{'ng-click' => 'create()'} Create

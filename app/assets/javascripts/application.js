@@ -18,5 +18,7 @@
 //= require angular
 //= require angular-route
 //= require angular-bootstrap
+//= require angular-animate
+//= require angular-loading-bar
 //= require ./ngApp
 //= require_tree .

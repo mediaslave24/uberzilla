@@ -1,4 +1,4 @@
-window.ngApp = angular.module('app', ['ngRoute', 'ui.bootstrap']);
+window.ngApp = angular.module('app', ['ngRoute', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate']);
 
 ngApp.config(['$routeProvider', function ($routeProvider) {
   function logout() {
@@ -104,4 +104,6 @@ ngApp.run([
   $timeout(function () {
     $rootScope.hideAlerts = true;
   }, 3000);
+
+  $rootScope.loggedIn = !!currentUser.type;
 }]);

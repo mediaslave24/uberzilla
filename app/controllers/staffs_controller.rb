@@ -6,6 +6,6 @@ class StaffsController < ApplicationController
   end
 
   def resource_params
-    params.require(:staff).permit(:name, :email, :type, :password)
+    params.require(:staff).permit(:name, :email, :type, :password, :department_id)
   end
 end

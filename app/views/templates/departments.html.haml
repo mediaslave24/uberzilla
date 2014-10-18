@@ -11,10 +11,11 @@
       %th
         %a{href: 'javascript:void(0);', 'ng-click' => 'destroy(d)'} Destroy
 
-%form#create-form.form
-  %h3 New Department
-  .form-group
-    %label Name
-    %input.form-control{type: 'text', 'ng-model' => 'newDepartment.name'}
+.col-md-8
+  %form#create-form.form
+    %h3 New Department
+    .form-group
+      %label Name
+      %input.form-control{type: 'text', 'ng-model' => 'newDepartment.name'}
 
-  %button.btn.btn-default{'ng-click' => 'create()'} Ok
+    %button.btn.btn-default{'ng-click' => 'create()'} Ok
