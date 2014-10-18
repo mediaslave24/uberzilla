@@ -8,7 +8,7 @@ ngApp.controller('app', [
     function ($location, $rootScope, currentUser, api, $timeout, $scope) {
 
   var ALPHA = '\\w{3}';
-  var HEX = '[0-9a-f]{3}';
+  var HEX = '[0-9a-f]{2}';
   var SEARCH_PATTERN = new RegExp('^' + ALPHA + '-' + HEX + '-' + ALPHA + '-' + HEX + '-' + ALPHA + '$');
 
   function tab(name, path, activeFn) {
