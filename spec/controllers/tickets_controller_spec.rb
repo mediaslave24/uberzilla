@@ -74,7 +74,7 @@ RSpec.describe TicketsController, :type => :controller do
         format: :json,
         id: ticket.to_param,
         customer: customer_params
-      expect(json['changelog']).to eq(ticket.changelog.as_json)
+      expect(json).to eq(ticket.changelog.as_json)
     end
   end
 end

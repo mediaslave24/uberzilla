@@ -16,5 +16,13 @@
         %select.form-control{'ng-options' => 'status.id as status.name for status in ticketStatuses', 'ng-model' => 'ticket.status_id'}
 
       %p
-        %b Assignee
+        %b Assignee (<a href='javascript:void(0);' ng-click='takeOwnerShip()'>Take Ownership</a>)
         %select.form-control{'ng-options' => 'staff.id as staff.name for staff in staffs', 'ng-model' => 'ticket.staff_id'}
+
+    %div
+      %h3 Changes
+      %ul
+        %li{'ng-repeat' => 'change in formattedChangelog'}
+          %b {{ change.updated_at[1] | strDate:"YYYY/DD/MM HH:mm" }}
+
+          {{ change.message }}

@@ -26,7 +26,7 @@ class TicketsController < ApplicationController
 
   def changelog
     @ticket = tickets.find_by!(uid: params[:id])
-    respond_with(changelog: @ticket.changelog)
+    respond_with(@ticket.changelog)
   end
 
   def destroy

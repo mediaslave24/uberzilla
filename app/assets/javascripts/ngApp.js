@@ -94,11 +94,9 @@ ngApp.run([
       $rootScope.ticketStatuses = data;
     });
 
-    if (!!currentUser.type) {
-      api.staffs.index().success(function (data) {
-        $rootScope.staffs = data;
-      });
-    }
+    api.staffs.index().success(function (data) {
+      $rootScope.staffs = data;
+    });
   }
 
   $timeout(function () {

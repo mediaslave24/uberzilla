@@ -41,6 +41,13 @@ ngApp.factory('api', ['$http', function ($http) {
           url: join('/', resourceName, '/', id, '.json'),
           method: 'DELETE'
         });
+      },
+
+      memberPath: function (id, path) {
+        return $http({
+          url: join('/', resourceName, '/', id, '/', path, '.json'),
+          method: 'GET'
+        });
       }
     };
   }

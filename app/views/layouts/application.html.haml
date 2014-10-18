@@ -13,6 +13,6 @@
         .col-md-10=yield
 
     :javascript
-      window.currentUser = #{current_user.try(:as_json, only: [:type]).to_json};
+      window.currentUser = #{current_user.try(:as_json, only: [:type, :id]).to_json};
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
