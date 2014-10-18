@@ -4,7 +4,7 @@ ngApp.controller('newTicket', ['$scope', 'api', '$location', function ($scope, a
       ticket: $scope.ticket,
       customer: $scope.customer
     }).success(function (data) {
-      $location.path('/tickets/' + data.uid);
+      $location.path('/ticket/' + data.uid);
     });
   };
 }]);

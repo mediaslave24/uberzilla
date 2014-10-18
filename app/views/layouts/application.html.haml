@@ -2,10 +2,12 @@
 %html{'ng-app' => 'app'}
   %head
   = csrf_meta_tags
-  %body
+  %body{'ng-controller' => 'app'}
     .container
       .row
         .col-md-2
+          .form-group{'ng-show' => 'loggedIn'}
+            %input.form-control{type: 'text', placeholder: 'Search', 'ng-model' => 'search', 'ng-keypress' => '$event.keyCode === 13 && doSearch()'}
           %tabset{vertical: 'true', type: 'pills'}
             %tab{'ng-repeat' => 'tab in tabs', active: 'tab.active', heading: '{{tab.name}}', 'ng-click' => 'tab.select()'}
           - flash.each do |type, message|

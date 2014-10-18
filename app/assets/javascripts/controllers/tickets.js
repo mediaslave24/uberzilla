@@ -1,6 +1,14 @@
-ngApp.controller('tickets', ['$scope', 'api', function ($scope, api) {
+ngApp.controller('tickets', [
+    '$scope',
+    'api',
+    '$routeParams',
+    function ($scope, api, $routeParams) {
+
   function loadTickets() {
-    api.tickets.index().success(function (data) {
+    api.tickets.index({
+      'filter[status_id]': $routeParams.status,
+      'filter[subject]': $routeParams.subject
+    }).success(function (data) {
       $scope.tickets = data;
     });
   }

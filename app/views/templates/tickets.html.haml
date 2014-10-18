@@ -13,7 +13,7 @@
     %tr{'ng-repeat' => 't in tickets'}
       %td {{ $index }}
       %td
-        %a{href: '#/tickets/{{t.uid}}'}{{ t.subject }}
+        %a{href: '#/ticket/{{t.uid}}'}{{ t.subject }}
       %td {{ t.customer_email }}
       %td {{ t.customer_name }}
       %td {{ t.staff_name }}
