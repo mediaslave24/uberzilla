@@ -4,6 +4,10 @@ Rails.application.routes.draw do
     get :changelog, on: :member
   end
 
+  with_options only: [:index, :create, :destroy, :update] do |draw|
+    draw.resources :departments, :statuses, :users
+  end
+
   root 'templates#index'
 
   get '/t/:template', controller: :templates, action: :index
