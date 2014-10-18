@@ -32,7 +32,12 @@ end
 # More info at https://github.com/guard/guard#readme
 
 guard :jasmine, server: :thin, server_mount: '/specs', all_on_start: false do
-  watch(%r{spec/javascripts/spec\.(js\.coffee|js|coffee)$}) { 'spec/javascripts' }
+  # watch(%r{spec/javascripts/spec\.(js\.coffee|js|coffee)$}) { 'spec/javascripts' }
+  # watch(%r{spec/javascripts/.+_spec\.(js\.coffee|js|coffee)$})
+  # watch(%r{spec/javascripts/fixtures/.+$})
+  # watch(%r{app/assets/javascripts/(.+?)\.(js\.coffee|js|coffee)(?:\.\w+)*$}) { |m| "spec/javascripts/#{ m[1] }_spec.#{ m[2] }" }
+
+  watch(%r{spec/javascripts/.+[sS]pec\.(js\.coffee|js|coffee)$}) { 'spec/javascripts' }
   watch(%r{spec/javascripts/.+_spec\.(js\.coffee|js|coffee)$})
   watch(%r{spec/javascripts/fixtures/.+$})
   watch(%r{app/assets/javascripts/(.+?)\.(js\.coffee|js|coffee)(?:\.\w+)*$}) { |m| "spec/javascripts/#{ m[1] }_spec.#{ m[2] }" }
