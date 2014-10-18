@@ -3,6 +3,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+Dir[File.expand_path '../support/**/*.rb', __FILE__].each { |f| require f }
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -25,6 +26,8 @@ require 'rspec/rails'
 ActiveRecord::Migration.maintain_test_schema!
 
 FactoryGirl.find_definitions
+
+Warden.test_mode!
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
@@ -70,4 +73,12 @@ RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
 
   config.include Warden::Test::Helpers, type: :controller
+
+  config.include Warden::Test::ControllerHelpers, type: :controller
+
+  config.after type: :controller do
+    Warden.test_reset!
+  end
+
+  config.include ControllerSpecHelper, type: :controller
 end

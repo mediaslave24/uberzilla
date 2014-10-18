@@ -11,4 +11,12 @@ class ApplicationController < ActionController::Base
     def verified_request?
       super || form_authenticity_token == request.headers['X-XSRF-TOKEN']
     end
+
+    def warden
+      request.env['warden']
+    end
+
+    def current_user
+      warden.user
+    end
 end

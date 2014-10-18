@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
-  belongs_to :department
   include Password
+  validates :name, presence: true
+  validates :email, email: true, uniqueness: true, presence: true
 end

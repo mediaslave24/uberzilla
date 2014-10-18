@@ -43,5 +43,7 @@ FactoryGirl.define do
     status factory: :ticket_status
     staff
     department
+    subject { generate :random_name }
+    body { generate :random_name }
   end
 end

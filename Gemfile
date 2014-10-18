@@ -22,7 +22,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
-gem 'haml'
+gem 'haml-rails'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
@@ -32,10 +32,13 @@ gem 'momentjs-rails'
 gem 'jasmine-rails', group: :development
 gem 'pry-rails', group: :development
 gem 'paper_trail'
-gem 'warden'
+gem 'rails_warden'
+gem 'therubyracer'
+gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'thin'
 gem 'bcrypt'
+gem 'valid_email'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -55,4 +58,5 @@ group :test do
   gem 'factory_girl_rails', require: 'factory_girl'
   gem 'guard-jasmine', require: false, github: 'mediaslave24/guard-jasmine', branch: 'jasmine-2'
   gem 'guard-rspec', require: false
+  gem 'warden-rspec-rails'
 end

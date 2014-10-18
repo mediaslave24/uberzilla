@@ -32,6 +32,39 @@ module Uberzilla
       g.helper_specs false
       g.fixture_replacement :factory_girl
       g.factory_girl false
+      g.javascripts false
+      g.stylesheets false
+      g.helpers false
+    end
+
+    Warden::Manager.serialize_into_session do |user|
+      user.id
+    end
+
+    Warden::Manager.serialize_from_session do |id|
+      User.find_by_id(id)
+    end
+
+    Warden::Strategies.add :password do
+      def valid?
+        params['login'] && params['password']
+      end
+
+      def user
+        User.find_by(email: params['login']) || User.new
+      end
+
+      def authenticate!
+        if user.valid_password?(params['password'])
+          success!(user)
+        else
+          fail!(user)
+        end
+      end
+    end
+
+    config.middleware.use RailsWarden::Manager do |m|
+      m.failure_app = SessionsController.action(:unauthenticated)
     end
   end
 end

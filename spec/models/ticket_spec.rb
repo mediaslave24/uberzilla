@@ -13,4 +13,12 @@ RSpec.describe Ticket, :type => :model do
       end
     end
   end
+
+  context '#to_param' do
+    let(:ticket) { create :ticket }
+
+    it 'is taken from "uid"' do
+      expect(ticket.to_param).to eq(ticket.uid)
+    end
+  end
 end
