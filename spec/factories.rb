@@ -46,4 +46,10 @@ FactoryGirl.define do
     subject { generate :random_name }
     body { generate :random_name }
   end
+
+  factory :comment do
+    target factory: :ticket
+    author factory: :staff
+    body 'body'
+  end
 end

@@ -9,4 +9,5 @@ class Comment < ActiveRecord::Base
   end
 
   include Pusher::CommentCallbacks
+  include TicketCommentMailer::CommentCallbacks
 end
