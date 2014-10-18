@@ -19,9 +19,14 @@ class TicketsController < ApplicationController
   end
 
   def update
-    @ticket = current_user.tickets.find_by!(uid: params[:id])
+    @ticket = tickets.find_by!(uid: params[:id])
     @ticket.update ticket_params
     respond_with(@ticket)
+  end
+
+  def changelog
+    @ticket = tickets.find_by!(uid: params[:id])
+    respond_with(changelog: @ticket.changelog)
   end
 
   private
@@ -34,10 +39,18 @@ class TicketsController < ApplicationController
     end
 
     def ticket_params
-      if current_user.is_a?(Admin) || current_user.is_a?(Staff)
-        params.require(:ticket).permit(:subject, :body, :status_id, :department_id)
-      else
+      if current_user.is_a?(Customer)
         params.require(:ticket).permit(:subject, :body)
+      else
+        params.require(:ticket).permit(:subject, :body, :status_id, :department_id)
+      end
+    end
+
+    def tickets
+      if current_user.is_a?(Customer)
+        current_user.tickets
+      else
+        Ticket.all
       end
     end
 end

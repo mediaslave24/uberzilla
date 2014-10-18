@@ -59,4 +59,22 @@ RSpec.describe TicketsController, :type => :controller do
       expect(assigns(:ticket).attributes).to include(ticket_params)
     end
   end
+
+  context 'GET changelog' do
+    let! :customer do
+      create :customer, customer_params
+    end
+
+    let! :ticket do
+      create(:ticket, customer: customer).tap { |t| t.update subject: 'Random Name' }
+    end
+
+    it 'returns ticket changelog' do
+      get :changelog,
+        format: :json,
+        id: ticket.to_param,
+        customer: customer_params
+      expect(json['changelog']).to eq(ticket.changelog.as_json)
+    end
+  end
 end
