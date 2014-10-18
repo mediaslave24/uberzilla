@@ -7,9 +7,7 @@ class TicketsController < ApplicationController
   end
 
   def index
-    @tickets = Ticket
-      .limit(params[:limit] || 10)
-      .offset(params[:offset] || 0)
+    @tickets = Ticket.apply_filter Ticket.all, params[:filter]
     respond_with(@tickets)
   end
 

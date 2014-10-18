@@ -37,4 +37,12 @@ class Ticket < ActiveRecord::Base
 
   include Pusher::TicketCallbacks
   include TicketMailer::TicketCallbacks
+
+  def self.apply_filter(scope, filter = {})
+    filter = (filter || {}).symbolize_keys
+    scope = scope.merge(scope.where status_id: filter[:status_id]) if filter[:status_id]
+    scope = scope.merge(scope.where department_id: filter[:department_id]) if filter[:department_id]
+    scope = scope.merge(scope.where 'subject LIKE ?', "%#{filter[:subject]}%") if filter[:subject]
+    scope
+  end
 end
