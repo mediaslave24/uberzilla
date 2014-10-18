@@ -81,4 +81,16 @@ RSpec.configure do |config|
   end
 
   config.include ControllerSpecHelper, type: :controller
+
+  config.before :suite do
+    PaperTrail.enabled = false
+  end
+
+  config.before paper_trail: true do
+    PaperTrail.enabled = true
+  end
+
+  config.after paper_trail: true do
+    PaperTrail.enabled = false
+  end
 end

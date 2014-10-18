@@ -8,4 +8,8 @@ class Ticket < ActiveRecord::Base
   alias_attribute :to_param, :uid
   validates_presence_of :subject, :body
   has_paper_trail
+
+  def changelog
+    versions.map(&:changeset)
+  end
 end

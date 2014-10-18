@@ -21,4 +21,16 @@ RSpec.describe Ticket, :type => :model do
       expect(ticket.to_param).to eq(ticket.uid)
     end
   end
+
+  context '#changelog', paper_trail: true do
+    let! :ticket do
+      create :ticket
+    end
+
+    it 'returns expected info' do
+      ticket.update! subject: 'Why client needs changelog?'
+      ticket.update! subject: 'Why?'
+      expect(ticket.changelog.length).to eq(3)
+    end
+  end
 end
