@@ -35,4 +35,5 @@ class Ticket < ActiveRecord::Base
   end
 
   include Pusher::TicketCallbacks
+  include TicketMailer::TicketCallbacks
 end

@@ -51,4 +51,24 @@ RSpec.describe Ticket, :type => :model do
       expect(ticket.status).to eq(default_status)
     end
   end
+
+  it 'triggers TicketMailer#customer_ticket_created on creation' do
+    expect(TicketMailer).to receive(:customer_ticket_created).with(kind_of(Ticket))
+    create :ticket
+  end
+
+  it 'triggers TicketMailer#customer_ticket_created on creation' do
+    expect(TicketMailer).to receive(:department_ticket_created).with(kind_of(Ticket))
+    create :ticket
+  end
+
+  it 'triggers TicketMailer#customer_ticket_updated and Ticket#customer on update' do
+    expect(TicketMailer).to receive(:customer_ticket_updated).with(kind_of(Ticket))
+    create(:ticket).update subject: '123'
+  end
+
+  it 'triggers TicketMailer#staff_ticket_updated and Ticket#customer on update' do
+    expect(TicketMailer).to receive(:staff_ticket_updated).with(kind_of(Ticket))
+    create(:ticket).update subject: '123'
+  end
 end
