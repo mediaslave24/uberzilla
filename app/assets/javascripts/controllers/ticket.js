@@ -82,27 +82,18 @@ ngApp.controller('ticket', [
         }
 
         if (log.status_id) {
-          var status1 = _.find($scope.ticketStatuses, {
-            id: log.status_id[0]
-          }) || nilObject,
+          var status1 = _.find($scope.ticketStatuses, {id: log.status_id[0]}) || nilObject,
 
-            status2 = _.find($scope.ticketStatuses, {
-              id: log.status_id[1]
-            }) || nilObject;
+            status2 = _.find($scope.ticketStatuses, {id: log.status_id[1]}) || nilObject;
 
           responses.push({
             time: log.updated_at[1], message: 'Changed ticket status from ' + status1.name + ' to ' + status2.name
           });
         }
 
-        if(log.department_id) {
-          var department1 = _.find($scope.departments, {
-            id: log.department_id[0]
-          }) || nilObject,
-
-            department2 = _.find($scope.departments, {
-              id: log.department_id[1]
-            }) || nilObject;
+        if (log.department_id) {
+          var department1 = _.find($scope.departments, {id: log.department_id[0]}) || nilObject,
+            department2 = _.find($scope.departments, {id: log.department_id[1]}) || nilObject;
 
           responses.push({
             time: log.updated_at[1], message: 'Changed ticket department from ' + department1.name + ' to ' + department2.name
