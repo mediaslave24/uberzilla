@@ -29,6 +29,12 @@ class TicketsController < ApplicationController
     respond_with(changelog: @ticket.changelog)
   end
 
+  def destroy
+    @ticket = tickets.find_by!(uid: params[:id])
+    @ticket.destroy
+    respond_with(@ticket)
+  end
+
   private
     def current_customer
       @current_customer ||= current_user || Customer.find_or_create_by(customer_params)
@@ -51,6 +57,6 @@ class TicketsController < ApplicationController
         current_user.tickets
       else
         Ticket.all
-      end.includes(:customer, :status, :staff => :department)
+      end.includes(:customer, :status, :staff)
     end
 end

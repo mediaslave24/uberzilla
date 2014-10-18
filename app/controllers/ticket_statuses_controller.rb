@@ -6,6 +6,6 @@ class TicketStatusesController < ApplicationController
   end
 
   def resource_params
-    params.require(:ticket_status).permit(:name)
+    params.require(:ticket_status).permit(:name, :default)
   end
 end

@@ -1,0 +1,23 @@
+%table.table{'ng-init' => 'loadStatuses()'}
+  %thead
+    %tr
+      %th #
+      %th Name
+      %th Default
+      %th Actions
+  %tbody
+    %tr{'ng-repeat' => 's in ticketStatuses'}
+      %td {{ $index }}
+      %td {{ s.name }}
+      %td
+        %input{type: 'checkbox', 'ng-checked' => 's.default', 'ng-click' => 'makeDefault(s)'}
+      %th
+        %a{href: 'javascript:void(0);', 'ng-click' => 'destroy(s)'} Destroy
+
+%form#create-form.form
+  %h3 New Ticket Status
+  .form-group
+    %label Name
+    %input.form-control{type: 'text', 'ng-model' => 'newStatus.name'}
+
+  %button.btn.btn-default{'ng-click' => 'create()'} Ok

@@ -1,3 +1,7 @@
 %h1 {{ ticket.subject }}
 
 %p {{ ticket.body }}
+
+%p{'ng-show' => '!!ticket.department'} <b>Department:</b> {{ ticket.department_name }}
+
+%p <b>Status</b>: {{ ticket.status_name }}

@@ -1,0 +1,20 @@
+%table.table{'ng-init' => 'loadDepartments()'}
+  %thead
+    %tr
+      %th #
+      %th Name
+      %th Actions
+  %tbody
+    %tr{'ng-repeat' => 'd in departments'}
+      %td {{ $index }}
+      %td {{ d.name }}
+      %th
+        %a{href: 'javascript:void(0);', 'ng-click' => 'destroy(d)'} Destroy
+
+%form#create-form.form
+  %h3 New Department
+  .form-group
+    %label Name
+    %input.form-control{type: 'text', 'ng-model' => 'newDepartment.name'}
+
+  %button.btn.btn-default{'ng-click' => 'create()'} Ok

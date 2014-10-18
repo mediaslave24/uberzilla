@@ -1,12 +1,14 @@
-%table.table
+%table.table{'ng-init' => 'loadTickets()'}
   %thead
     %tr
       %th #
       %th Subject
       %th Customer Email
       %th Customer Name
+      %th Assignee Name
       %td Department
       %td Status
+      %td Actions
   %tbody
     %tr{'ng-repeat' => 't in tickets'}
       %td {{ $index }}
@@ -14,5 +16,13 @@
         %a{href: '#/tickets/{{t.uid}}'}{{ t.subject }}
       %td {{ t.customer_email }}
       %td {{ t.customer_name }}
+      %td
+        %select.form-control{'ng-model' => 't.newStaffId'}
+          %option{'ng-repeat' => 's in staffs', 'ng-selected' => 's.id === t.staff_id'} {{ s.name }}
+
       %td {{ t.department_name }}
-      %td {{ t.status_name }}
+      %td
+        %select.form-control{'ng-model' => 't.newStatusId'}
+          %option{'ng-repeat' => 's in ticketStatuses', 'ng-selected' => 's.id === t.status_id'} {{ s.name }}
+      %td
+        %a{href: 'javascript:void(0);', 'ng-click' => 'destroy(t)'} Destroy

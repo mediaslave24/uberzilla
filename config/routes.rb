@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
-  resources :tickets, only: [:create, :update, :show, :index] do
+  resources :tickets, only: [:create, :update, :show, :index, :destroy] do
     get :changelog, on: :member
   end
 
   with_options only: [:index, :create, :destroy, :update] do |draw|
-    draw.resources :departments, :ticket_statuses, :users
+    draw.resources :departments, :ticket_statuses, :users, :staffs
   end
 
   root 'templates#index'

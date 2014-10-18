@@ -19,14 +19,14 @@
   %h3 New Staff
   .form-group
     %label Name
-    %input.form-control{type: 'text', 'ng-model' => 'newUser.name'}
+    %input.form-control{type: 'text', 'ng-model' => 'newStaff.name'}
 
   .form-group
     %label Email
-    %input.form-control{type: 'email', 'ng-model' => 'newUser.email'}
+    %input.form-control{type: 'email', 'ng-model' => 'newStaff.email'}
 
   .form-group
     %label Password
-    %input.form-control{type: 'password', 'ng-model' => 'newUser.password'}
+    %input.form-control{type: 'password', 'ng-model' => 'newStaff.password'}
 
   %button.btn.btn-default{'ng-click' => 'create()'} Create

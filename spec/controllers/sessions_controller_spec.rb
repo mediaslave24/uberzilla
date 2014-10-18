@@ -14,18 +14,6 @@ RSpec.describe SessionsController, :type => :controller do
 
   let(:password) { 'password' }
 
-  context 'unauthenticated' do
-    let :errors do
-      {
-        'error1' => 'abc'
-      }
-    end
-    it 'returns failure with errors' do
-      get :unauthenticated, error: errors, format: :json
-      expect(json['error']).to eq(errors)
-    end
-  end
-
   context 'create' do
     let!(:staff) { create :staff, password: password }
     it 'creates new user session' do

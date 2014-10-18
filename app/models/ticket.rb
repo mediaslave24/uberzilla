@@ -13,7 +13,8 @@ class Ticket < ActiveRecord::Base
   with_options allow_nil: true do |opt|
     opt.delegate :name, :email, to: :customer, prefix: true
     opt.delegate :department_name, to: :staff
-    opt.delegate :name, to: :status, prefix: true
+    opt.delegate :name, :id, to: :status, prefix: true
+    opt.delegate :name, :email, :id, to: :staff, prefix: true
   end
 
   def changelog
@@ -25,7 +26,11 @@ class Ticket < ActiveRecord::Base
       customer_email: customer_email,
       customer_name: customer_name,
       department_name: department_name,
-      status_name: status_name
+      status_name: status_name,
+      staff_name: staff_name,
+      staff_email: staff_email,
+      status_id: status_id,
+      staff_id: staff_id
     )
   end
 end

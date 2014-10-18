@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe UsersController, :type => :controller do
+RSpec.describe StaffsController, :type => :controller do
   let :resource_name do
-    'users'
+    'staffs'
   end
 
   let :resource_params do

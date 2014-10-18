@@ -21,9 +21,19 @@ ngApp.config(['$routeProvider', function ($routeProvider) {
       templateUrl: '/t/tickets'
     })
 
-    .when('/users', {
-      controller: 'users',
-      templateUrl: '/t/users'
+    .when('/staffs', {
+      controller: 'staffs',
+      templateUrl: '/t/staffs'
+    })
+
+    .when('/departments', {
+      controller: 'departments',
+      templateUrl: '/t/departments'
+    })
+
+    .when('/ticket_statuses', {
+      controller: 'statuses',
+      templateUrl: '/t/statuses'
     })
 
     .when('/login', { templateUrl: '/t/login' })
@@ -56,19 +66,24 @@ ngApp.run([
     };
   }
 
-  $rootScope.tabs = [tab('New ticket', '/')];
+  $rootScope.tabs = [];
 
   if (!!currentUser.type) {
-    $rootScope.tabs.push(tab('Tickets', '/tickets'));
+    $rootScope.tabs.push(
+        tab('New ticket', '/'),
+        tab('Tickets', '/tickets')
+    );
 
     if (currentUser.type === 'Admin') {
-      $rootScope.tabs.push(tab('Users', '/users'));
-      $rootScope.tabs.push(tab('Departments', '/departments'));
-      $rootScope.tabs.push(tab('Ticket Statuses', '/ticket_statuses'));
+      $rootScope.tabs.push(
+          tab('Staff', '/staffs'),
+          tab('Departments', '/departments'),
+          tab('Ticket Statuses', '/ticket_statuses')
+      );
     }
-  }
 
-  $rootScope.tabs.push(currentUser.type ? tab('Logout', '/logout') : tab('Login', '/login'));
+    $rootScope.tabs.push(tab('Logout', '/logout'));
+  }
 
   if (!window.jasmine) {
     api.departments.index().success(function (data) {
@@ -78,6 +93,12 @@ ngApp.run([
     api.ticketStatuses.index().success(function (data) {
       $rootScope.ticketStatuses = data;
     });
+
+    if (!!currentUser.type) {
+      api.staffs.index().success(function (data) {
+        $rootScope.staffs = data;
+      });
+    }
   }
 
   $timeout(function () {

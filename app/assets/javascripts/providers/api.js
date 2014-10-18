@@ -49,7 +49,7 @@ ngApp.factory('api', ['$http', function ($http) {
     tickets: resource('tickets'),
     departments: resource('departments'),
     ticketStatuses: resource('ticket_statuses'),
-    users: resource('users'),
+    staffs: resource('staffs'),
 
     // For testing purposes
     _resource: resource
