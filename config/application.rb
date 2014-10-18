@@ -31,6 +31,7 @@ module Uberzilla
       g.test_framework :rspec, fixture: false
       g.helper_specs false
       g.fixture_replacement :factory_girl
+      g.factory_girl false
     end
   end
 end

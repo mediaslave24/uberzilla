@@ -34,6 +34,8 @@ gem 'pry-rails', group: :development
 gem 'paper_trail'
 gem 'warden'
 gem 'twitter-bootstrap-rails'
+gem 'thin'
+gem 'bcrypt'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
