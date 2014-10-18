@@ -12,7 +12,7 @@ RSpec.describe User, :type => :model do
     end
 
     it 'is validatable' do
-      expect(@user.password).to eq(@password)
+      expect(@user.valid_password?(@password)).to eq(true)
     end
   end
 

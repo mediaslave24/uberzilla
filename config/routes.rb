@@ -11,5 +11,8 @@ Rails.application.routes.draw do
   root 'templates#index'
 
   get '/t/:template', controller: :templates, action: :index
-  get '/unauthenticated', controller: :sessions, action: :unauthenticated
+
+  resource :session, only: [:create, :destroy] do
+    get 'unauthenticated', action: :unauthenticated
+  end
 end

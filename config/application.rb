@@ -65,6 +65,7 @@ module Uberzilla
 
     config.middleware.use RailsWarden::Manager do |m|
       m.failure_app = SessionsController.action(:unauthenticated)
+      m.default_strategies :password
     end
   end
 end
