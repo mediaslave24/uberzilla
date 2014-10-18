@@ -10,24 +10,32 @@ module JsonResourceActions
       .order(created_at: :desc)
       .limit(params[:limit] || 10)
       .offset(params[:offset] || 0)
-    respond_with @resources
+    render json: @resources.as_json
   end
 
   def create
     @resource = resources.create(resource_params)
-    respond_with @resource
+    if @resource.persisted?
+      render json: @resourse.as_json
+    else
+      render json: @resourse.errors.as_json, status: 422
+    end
   end
 
   def update
     @resource = find_resource
     @resource.update(resource_params)
-    respond_with @resource
+    if @resource.valid?
+      render json: @resource.as_json
+    else
+      render json: @resource.errors.as_json, status: 422
+    end
   end
 
   def destroy
     @resource = find_resource
     @resource.destroy
-    respond_with @resource
+    render json: @resource.as_json
   end
 
   def find_resource

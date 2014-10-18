@@ -28,3 +28,17 @@
           %b {{ change.updated_at[1] | strDate:"YYYY/DD/MM HH:mm" }}
 
           {{ change.message }}
+
+    %div
+      %h3 Replies
+
+      %ul
+        %li{'ng-repeat' => 'comment in comments'}
+          %b {{ comment.author_name }} {{ comment.created_at | strDate:"YYYY/MM/DD HH:mm" }}
+          %p {{ comment.body }}
+
+      %form.form{'ng-if' => 'loggedIn'}
+        .form-group
+          %label Your Reply
+          %textarea.form-control{'ng-model' => '$parent.newComment.body'}
+        %button.btn.btn-default{'ng-click' => 'sendComment()'} Send

@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141018131257) do
+ActiveRecord::Schema.define(version: 20141018191437) do
+
+  create_table "comments", force: true do |t|
+    t.text     "body"
+    t.integer  "target_id"
+    t.string   "target_type"
+    t.integer  "author_id"
+    t.string   "author_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "departments", force: true do |t|
     t.string   "name"

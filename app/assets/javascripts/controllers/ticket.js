@@ -9,6 +9,28 @@ ngApp.controller('ticket', [
 
   var nilObject = {name: "Unknown"};
 
+  window.api = api;
+  window.$scope = $scope;
+
+  function sendComment() {
+    var body = $scope.newComment.body;
+    $scope.newComment = null;
+
+    return api.ticketComments($routeParams.uid).create({
+      comment: {
+        body: body,
+        author_id: currentUser.id,
+        author_type: currentUser.type
+      }
+    }).success(loadTicket);
+  }
+
+  function loadComments() {
+    return api.ticketComments($routeParams.uid).index().success(function (data) {
+      $scope.comments = data;
+    });
+  }
+
   function loadChangelog() {
     return api.tickets.memberPath($scope.ticket.uid, 'changelog').success(function (data) {
       $scope.changelog = data;
@@ -19,7 +41,7 @@ ngApp.controller('ticket', [
   function loadTicket() {
     return api.tickets.show($routeParams.uid).success(function (data) {
       $scope.ticket = data;
-    }).success(loadChangelog);
+    }).success(loadChangelog).success(loadComments);
   }
 
   function updateTicket() {
@@ -101,5 +123,8 @@ ngApp.controller('ticket', [
 
   $scope.loadChangelog = loadChangelog;
 
+  $scope.sendComment = sendComment;
+
   Pusher.subscribe(pusherNames.channels.ticket($routeParams.uid), pusherNames.events.ticketUpdate(), loadTicket);
+  Pusher.subscribe(pusherNames.channels.ticket($routeParams.uid), pusherNames.events.ticketReply(), loadTicket);
 }]);

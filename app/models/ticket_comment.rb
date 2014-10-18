@@ -1,0 +1,2 @@
+class TicketComment < Comment
+end

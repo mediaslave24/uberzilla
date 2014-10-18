@@ -8,7 +8,8 @@ ngApp.value('pusherNames', {
   },
 
   events: {
-    ticketUpdate: function () { return 'ticket-update'; }
+    ticketUpdate: function () { return 'ticket-update'; },
+    ticketReply: function () { return 'ticket-reply'; }
   }
 });
 

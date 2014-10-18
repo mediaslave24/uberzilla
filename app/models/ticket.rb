@@ -8,6 +8,7 @@ class Ticket < ActiveRecord::Base
   before_create 'self.status = TicketStatus.default.first'
   alias_attribute :to_param, :uid
   validates_presence_of :subject, :body
+  has_many :comments, as: :target, class_name: 'TicketComment'
   has_paper_trail
 
   with_options allow_nil: true, prefix: true do |opt|

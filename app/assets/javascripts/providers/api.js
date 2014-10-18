@@ -52,11 +52,18 @@ ngApp.factory('api', ['$http', function ($http) {
     };
   }
 
+  function nestedResource(parentResourceName, childResourceName) {
+    return function (parentId) {
+      return resource(join(parentResourceName, '/', parentId, '/', childResourceName));
+    };
+  }
+
   return {
     tickets: resource('tickets'),
     departments: resource('departments'),
     ticketStatuses: resource('ticket_statuses'),
     staffs: resource('staffs'),
+    ticketComments: nestedResource('tickets', 'comments'),
 
     // For testing purposes
     _resource: resource
